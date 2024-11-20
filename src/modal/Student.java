@@ -1,6 +1,8 @@
 package modal;
 
-public class Student {
+import java.io.Serializable;
+
+public class Student implements Serializable {
     String IDNum;
     String Name;
     String Phone;
