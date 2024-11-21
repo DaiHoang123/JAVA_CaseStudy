@@ -54,11 +54,14 @@ public class StudentController {
     }
 
     public void deleteStudentByIDNum(String idNum){
+        Student temp = new Student();
         for(Student student: studentList){
             if(student.getIDNum().equalsIgnoreCase(idNum)){
-                studentList.remove(student);
+                temp = student;
+                break;
             }
         }
+        studentList.remove(temp);
     }
 
     public void deleteStudentByName(String name){

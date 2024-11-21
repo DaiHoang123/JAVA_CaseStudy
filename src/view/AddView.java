@@ -14,60 +14,15 @@ public class AddView {
         ClearScreen.clearScreen();
         studentController = new StudentController();
 
-        boolean isIdNum = false;
-        boolean isName = false;
-        boolean isPhone = false;
-        boolean isEmail = false;
-
         System.out.println();
         System.out.println("-----------------------------------------");
         System.out.println("Them sinh vien");
         System.out.println("-----------------------------------------");
 
-        String idNum = "";
-        String name = "";
-        String phone = "";
-        String email = "";
-
-        while(!isIdNum){
-            System.out.println("Nhap ID: ");
-            idNum = sc.nextLine();
-            if(!Validator.validateIDNum(idNum)){
-                System.out.println("ID chi gom chu va so! Vui long nhap lai");
-            } else {
-                isIdNum = true;
-            }
-        }
-
-        while(!isName){
-            System.out.println("Nhap ten: ");
-            name = sc.nextLine();
-            if(!Validator.validateName(name)){
-                System.out.println("Ten chi duoc bao gom chu cai! Vui long nhap lai");
-            } else {
-                isName = true;
-            }
-        }
-
-        while(!isPhone){
-            System.out.println("Nhap so dien thoai: ");
-            phone = sc.nextLine();
-            if(!Validator.validatePhone(phone)){
-                System.out.println("So dien thoai phai du 10 so, va bat dau bang so 0. Vui long nhap lai");
-            } else {
-                isPhone = true;
-            }
-        }
-
-        while(!isEmail){
-            System.out.println("Nhap email: ");
-            email = sc.nextLine();
-            if(!Validator.validateEmail(email)){
-                System.out.println("email phai co dinh dang EmailName@email.com! Vui long nhap lai");
-            } else {
-                isEmail = true;
-            }
-        }
+        String idNum = getNewIDNum();
+        String name = getNewName();
+        String phone = getNewPhone();
+        String email = getNewEmail();
 
         System.out.println();
         if(Validator.validateIDDuplicate(idNum)) {
@@ -79,5 +34,93 @@ public class AddView {
         System.out.println("-----------------------------------------");
         System.out.println("Enter de tiep tuc");
         sc.nextLine();  
+    }
+
+    public String getNewIDNum() {
+        boolean isIdNum = false;
+        String idNum = "";
+        while(!isIdNum) {
+            System.out.println("Nhap ID: ");
+            System.out.println("(Nhap chu va so)");
+            idNum = sc.nextLine();
+            if(idNum.isEmpty()) {
+                System.out.println("-----------------------------------------");
+                System.out.println("Khong duoc de trong!");
+                System.out.println("-----------------------------------------");
+            } else if(!Validator.validateIDNum(idNum)){
+                System.out.println("-----------------------------------------");
+                System.out.println("ID chi gom chu va so! Vui long nhap lai");
+                System.out.println("-----------------------------------------");
+            } else {
+                isIdNum = true;
+            }
+        }
+        return idNum;
+    }
+
+    public String getNewEmail() {
+        boolean isEmail = false;
+        String inputNewEmail = "";
+        while(!isEmail){
+            System.out.println("Nhap email: ");
+            System.out.println("(Email có dang EmailNam@email.com)");
+            inputNewEmail = sc.nextLine();
+            if(inputNewEmail.isEmpty()) {
+                System.out.println("-----------------------------------------");
+                System.out.println("Khong duoc de trong!");
+                System.out.println("-----------------------------------------");
+            } else if(!Validator.validateEmail(inputNewEmail)){
+                System.out.println("-----------------------------------------");
+                System.out.println("email phai co dinh dang EmailName@email.com! Vui long nhap lai");
+                System.out.println("-----------------------------------------");
+            } else {
+                isEmail = true;
+            }
+        }
+        return inputNewEmail;
+    }
+
+    public String getNewPhone() {
+        boolean isPhone = false;
+        String inputNewPhone = "";
+        while(!isPhone){
+            System.out.println("Nhap so dien thoai: ");
+            System.out.println("(Chi nhap so)");
+            inputNewPhone = sc.nextLine();
+            if(inputNewPhone.isEmpty()) {
+                System.out.println("-----------------------------------------");
+                System.out.println("Khong duoc de trong!");
+                System.out.println("-----------------------------------------");
+            } else if(!Validator.validatePhone(inputNewPhone)){
+                System.out.println("-----------------------------------------");
+                System.out.println("So dien thoai phai du 10 so, va bat dau bang so 0. Vui long nhap lai");
+                System.out.println("-----------------------------------------");
+            } else {
+                isPhone = true;
+            }
+        }
+        return inputNewPhone;
+    }
+
+    public String getNewName() {
+        boolean isName = false;
+        String inputNewName = "";
+        while(!isName){
+            System.out.println("Nhap ten: ");
+            System.out.println("(Chi nhap chu)");
+            inputNewName = sc.nextLine();
+            if(inputNewName.isEmpty()) {
+                System.out.println("-----------------------------------------");
+                System.out.println("Khong duoc de trong!");
+                System.out.println("-----------------------------------------");
+            } else if(!Validator.validateName(inputNewName)){
+                System.out.println("-----------------------------------------");
+                System.out.println("Ten chi duoc bao gom chu cai! Vui long nhap lai");
+                System.out.println("-----------------------------------------");
+            } else {
+                isName = true;
+            }
+        }
+        return inputNewName;
     }
 }

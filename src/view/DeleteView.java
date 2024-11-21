@@ -22,17 +22,31 @@ public class DeleteView {
         System.out.println("2. Xoa theo ten");
         System.out.println("3. Quay lai");
 
-        int input = Integer.parseInt(sc.nextLine());
-        
-        switch(input){
-            case 1 -> deleteByID();
-            case 2 -> deleteByName();
-            case 3 -> {
-                System.out.println("-----------------------------------------");
-                MainView mainView = new MainView();
-                mainView.mainview();
-                System.out.println("-----------------------------------------");
+        try{
+            int input = Integer.parseInt(sc.nextLine());
+            switch(input){
+                case 1 -> deleteByID();
+                case 2 -> deleteByName();
+                case 3 -> {
+                    System.out.println("-----------------------------------------");
+                    MainView mainView = new MainView();
+                    mainView.mainview();
+                    System.out.println("-----------------------------------------");
+                }
+                default -> {
+                    System.out.println("-----------------------------------------");
+                    System.out.println("Khong co chuc nang này!");
+                    System.out.println("-----------------------------------------");
+                    displayDeleteOptions();
+                }
             }
+        } catch(NumberFormatException e){
+            System.out.println("-----------------------------------------");
+            System.out.println("Chi duoc nhap so nguyen!");
+            System.out.println("-----------------------------------------");
+            System.out.println("Enter de tiep tuc");
+            sc.nextLine();
+            displayDeleteOptions();
         }
     }
 

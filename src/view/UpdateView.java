@@ -1,7 +1,7 @@
 package view;
 
-import java.util.Scanner;
 import controller.StudentController;
+import java.util.Scanner;
 import modal.Student;
 import util.ClearScreen;
 
@@ -20,30 +20,39 @@ public class UpdateView {
         System.out.println("2. Cap nhat theo ten");
         System.out.println("3. Quay lai");
 
-        int input = Integer.parseInt(sc.nextLine());
-
-        switch(input){
-            case 1 -> updateByID();
-            case 2 -> updateByName();
-            case 3 -> {
-                MainView mainView = new MainView();
-                mainView.mainview();
-            }   
-        }   
+        try{
+            int input = Integer.parseInt(sc.nextLine());
+            switch(input){
+                case 1 -> updateByID();
+                case 2 -> updateByName();
+                case 3 -> {
+                    MainView mainView = new MainView();
+                    mainView.mainview();
+                }
+            }
+        } catch(NumberFormatException e){
+            System.out.println("-----------------------------------------");
+            System.out.println("Chi duoc nhap so nguyen!");
+            System.out.println("-----------------------------------------");
+            System.out.println("Enter de tiep tuc");
+            sc.nextLine();
+            displayUpdateOptions();
+        }
     }
 
     public void updateByID(){
         System.out.print("Nhap ID: ");
         String inputID = sc.nextLine();
+
         student = studentController.findStudentByIDNum(inputID);
         if(student != null){
             System.out.println("-----------------------------------------");
-            System.out.println("Nhap ten moi: ");
-            String inputNewName = sc.nextLine();
-            System.out.println("Nhap so dien thoai moi: ");
-            String inputNewPhone = sc.nextLine();
-            System.out.println("Nhap email moi: ");
-            String inputNewEmail = sc.nextLine();
+
+            AddView addView = new AddView();
+            String inputNewName = addView.getNewName();
+            String inputNewPhone = addView.getNewPhone();
+            String inputNewEmail = addView.getNewEmail();
+
             System.out.println("-----------------------------------------");
             studentController.updateStudent(inputID, inputNewName, inputNewPhone, inputNewEmail);
             System.out.println("Cap nhat thanh cong");
@@ -67,12 +76,12 @@ public class UpdateView {
         student = studentController.findStudentByName(inputName);
         if(student != null){
             System.out.println("-----------------------------------------");
-            System.out.println("Nhap ten moi: ");
-            String inputNewName = sc.nextLine();
-            System.out.println("Nhap so dien thoai moi: ");
-            String inputNewPhone = sc.nextLine();
-            System.out.println("Nhap email moi: ");
-            String inputNewEmail = sc.nextLine();
+
+            AddView addView = new AddView();
+            String inputNewName = addView.getNewName();
+            String inputNewPhone = addView.getNewPhone();
+            String inputNewEmail = addView.getNewEmail();
+
             System.out.println("-----------------------------------------");
             studentController.updateStudent(student.getIDNum(), inputNewName, inputNewPhone, inputNewEmail);
             System.out.println("Cap nhat thanh cong");
@@ -88,20 +97,5 @@ public class UpdateView {
             sc.nextLine();
             displayUpdateOptions();
         }
-    }
-
-        public void updateStudent(){
-        String idNum = "";
-        String name, phone, email;
-        System.out.print("Nhap ID: ");
-        int inputID = Integer.parseInt(sc.nextLine());
-        System.out.print("Nhap ten: ");
-        name = sc.nextLine();
-        System.out.print("Nhap so dien thoai: ");
-        phone = sc.nextLine();
-        System.out.print("Nhap email: ");
-        email = sc.nextLine();
-
-        studentController.updateStudent(idNum, name, phone, email);
     }
 }

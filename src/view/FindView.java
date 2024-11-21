@@ -19,21 +19,29 @@ public class FindView {
         System.out.println("2. Tim kiem theo ten");
         System.out.println("3. Quay lai");
 
-        int input = Integer.parseInt(sc.nextLine());
-        
-        switch(input){
-            case 1 -> findByID();
-            case 2 -> findByName();
-            case 3 -> {
-                System.out.println();
-                System.out.println("-----------------------------------------");
-                System.out.println();
-                MainView mainView = new MainView();
-                mainView.mainview();
-                System.out.println();
-                System.out.println("-----------------------------------------");
-                System.out.println();
+        try{
+            int input = Integer.parseInt(sc.nextLine());
+            switch(input){
+                case 1 -> findByID();
+                case 2 -> findByName();
+                case 3 -> {
+                    System.out.println();
+                    System.out.println("-----------------------------------------");
+                    System.out.println();
+                    MainView mainView = new MainView();
+                    mainView.mainview();
+                    System.out.println();
+                    System.out.println("-----------------------------------------");
+                    System.out.println();
+                }
             }
+        } catch(NumberFormatException e){
+            System.out.println("-----------------------------------------");
+            System.out.println("Chi duoc nhap so nguyen!");
+            System.out.println("-----------------------------------------");
+            System.out.println("Enter de tiep tuc");
+            sc.nextLine();
+            displayFindOptions();
         }
     }
 
